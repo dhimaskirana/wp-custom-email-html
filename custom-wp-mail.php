@@ -67,3 +67,8 @@ function wpet_content_filters() {
 function clean_retrieve_password($message) {
 	return make_clickable(preg_replace('@<(http[^> ]+)>@', '$1', $message));
 }
+
+add_action('phpmailer_init', 'wpet_email_return_path');
+function wpet_email_return_path($phpmailer) {
+	$phpmailer->Sender = $phpmailer->From;
+}
